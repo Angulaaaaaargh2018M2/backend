@@ -1,4 +1,4 @@
-import { HapinessModule, OnError, OnStart } from '@hapiness/core';
+import { HapinessModule, HttpServerService, OnError, OnStart } from '@hapiness/core';
 import { LoggerModule, LoggerService } from '@hapiness/logger';
 import { Observable } from 'rxjs';
 
@@ -8,15 +8,18 @@ import { Observable } from 'rxjs';
         LoggerModule
     ],
     declarations: [],
-    providers: []
+    providers: [
+        HttpServerService
+    ]
 })
 export class ApplicationModule implements OnStart, OnError {
     /**
      * Class constructor
      *
+     * @param _httpServer
      * @param {LoggerService} _logger
      */
-    constructor(private _logger: LoggerService) {
+    constructor(private _httpServer: HttpServerService, private _logger: LoggerService) {
     }
 
     /**
@@ -25,7 +28,7 @@ export class ApplicationModule implements OnStart, OnError {
      * @return {void | Observable<any>}
      */
     onStart(): void | Observable<any> {
-        this._logger.info('Application started with success');
+        this._logger.info(`< Application.bootstrap > Server started at: ${this._httpServer.instance().info.uri}`);
     }
 
     /**
