@@ -1,7 +1,7 @@
 {
     "name": "nwt-school-back",
     "version": "1.0.0",
-    "description": "New Web Technologies' with Hapiness",
+    "description": "New Web's Technologies course with Hapiness",
     "main": "index.js",
     "private": false,
     "scripts": {
