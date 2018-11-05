@@ -1,20 +1,31 @@
 import { HapinessModule, OnError, OnStart } from '@hapiness/core';
+import { LoggerModule, LoggerService } from '@hapiness/logger';
 import { Observable } from 'rxjs';
 
 @HapinessModule({
     version: '1.0.0',
-    imports: [],
+    imports: [
+        LoggerModule
+    ],
     declarations: [],
     providers: []
 })
 export class ApplicationModule implements OnStart, OnError {
+    /**
+     * Class constructor
+     *
+     * @param {LoggerService} _logger
+     */
+    constructor(private _logger: LoggerService) {
+    }
+
     /**
      * On start process
      *
      * @return {void | Observable<any>}
      */
     onStart(): void | Observable<any> {
-        console.log('Application started with success');
+        this._logger.info('Application started with success');
     }
 
     /**
@@ -26,6 +37,6 @@ export class ApplicationModule implements OnStart, OnError {
      * @return {void | Observable<any>}
      */
     onError(error: Error, data?: any): void | Observable<any> {
-        console.error('A problem occurred during application\'s lifecycle');
+        this._logger.error('A problem occurred during application\'s lifecycle');
     }
 }
