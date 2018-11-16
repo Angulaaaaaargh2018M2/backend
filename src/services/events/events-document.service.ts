@@ -26,4 +26,32 @@ export class EventsDocumentService {
                 map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined)
             );
     }
+
+    /**
+     * Returns one event of the list matching id in parameter
+     *
+     * @param {string} id of the event in the db
+     *
+     * @return {Observable<Event | void>}
+     */
+    findById(id: string): Observable<Event | void> {
+        return from(this._document.findById(id))
+            .pipe(
+                map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined)
+            );
+    }
+
+    /**
+     * add event in events list
+     *
+     * @param {Event} event to create
+     *
+     * @return {Observable<Event>}
+     */
+    create(event: Event): Observable<Event> {
+        return from(this._document.create(event))
+            .pipe(
+                map((doc: MongooseDocument) => doc.toJSON())
+            );
+    }
 }

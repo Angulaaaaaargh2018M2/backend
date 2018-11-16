@@ -27,4 +27,32 @@ export class GiftsDocumentService {
                 map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined)
             );
     }
+
+    /**
+     * Returns one gift of the list matching id in parameter
+     *
+     * @param {string} id of the gift in the db
+     *
+     * @return {Observable<Gift | void>}
+     */
+    findById(id: string): Observable<Gift | void> {
+        return from(this._document.findById(id))
+            .pipe(
+                map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined)
+            );
+    }
+
+    /**
+     * Check if gift already exists (by name and eventId) and add it in gifts list
+     *
+     * @param {Gift} event to create
+     *
+     * @return {Observable<Gift>}
+     */
+    create(gift: Gift): Observable<Gift> {
+        return from(this._document.create(gift))
+            .pipe(
+                map((doc: MongooseDocument) => doc.toJSON())
+            );
+    }
 }
