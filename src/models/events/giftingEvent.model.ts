@@ -2,14 +2,14 @@ import {Model, MongoClientService, MongoModel} from '@hapiness/mongo';
 
 @MongoModel({
     adapter: 'mongoose',
-    collection: 'event'
+    collection: 'giftingEvents'
 })
-export class EventModel extends  Model {
+export class GiftingEventModel extends  Model {
     readonly  schema: any;
 
     constructor(private _mongoClientService: MongoClientService) {
 
-        super(EventModel);
+        super(GiftingEventModel);
 
         const dao = this._mongoClientService.getDao(this.connectionOptions);
 

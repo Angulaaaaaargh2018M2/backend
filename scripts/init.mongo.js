@@ -1,8 +1,9 @@
+
 use angulaaaaaargh
-db.createCollection("events");
+db.createCollection("giftingEvents");
 db.createCollection("gifts");
 
-db.events.insertMany([
+db.giftingEvents.insertMany([
     {
         "name": "Ma première liste",
         "nameEvent": "Noël",
@@ -58,9 +59,9 @@ db.gifts.insertMany([
 
 
 
-var idAnniv = db.events.findOne({"nameEvent": "Anniversaire"}, {_id:1});
+var idAnniv = db.giftingEvents.findOne({"nameEvent": "Anniversaire"}, {_id:1});
 
-var idNoel =  db.events.findOne({"nameEvent": "Noël"}, {_id:1});
+var idNoel =  db.giftingEvents.findOne({"nameEvent": "Noël"}, {_id:1});
 
 db.gifts.update({"name": "Pastèque"}, {$set: { "eventId": idNoel._id }});
 db.gifts.update({"name": "Orange"}, {$set: { "eventId": idAnniv._id }});

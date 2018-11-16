@@ -3,7 +3,7 @@ import * as Joi from 'joi';
 export const ID_PARAMETER = Joi.string().alphanum().required();
 
 
-export const EVENT = Joi.object().keys({
+export const GIFTING_EVENT = Joi.object().keys({
     name : Joi.string().min(2),
     nameEvent : Joi.string().min(2),
     asAGift : Joi.boolean(),
@@ -22,12 +22,12 @@ export const GIFT = Joi.object().keys({
 });
 
 
-export const EVENT_RESPONSE = Joi.object().keys({
+export const GIFTING_EVENT_RESPONSE = Joi.object().keys({
     id: ID_PARAMETER,
-    name : Joi.reach(EVENT, 'name'),
-    nameEvent : Joi.reach(EVENT, 'nameEvent'),
-    asAGift : Joi.reach(EVENT, 'asAGift'),
-    date : Joi.reach(EVENT, 'date'),
+    name : Joi.reach(GIFTING_EVENT, 'name'),
+    nameEvent : Joi.reach(GIFTING_EVENT, 'nameEvent'),
+    asAGift : Joi.reach(GIFTING_EVENT, 'asAGift'),
+    date : Joi.reach(GIFTING_EVENT, 'date'),
 });
 
 
@@ -41,8 +41,8 @@ export const GIFT_RESPONSE = Joi.object().keys({
 });
 
 
-export const EVENTS_RESPONSE = Joi.array().items(
-    EVENT_RESPONSE
+export const GIFTING_EVENTS_RESPONSE = Joi.array().items(
+    GIFTING_EVENT_RESPONSE
 ).min(1);
 
 

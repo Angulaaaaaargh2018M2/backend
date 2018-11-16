@@ -3,25 +3,24 @@ import {MongoClientService} from '@hapiness/mongo';
 import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MongooseDocument} from 'mongoose';
-import {EventModel} from '../../models/events';
-import {Event as EventInterface} from '../../interfaces/event';
-
+import {GiftingEventModel} from '../../models/events';
+import {GiftingEvent} from '../../interfaces';
 
 @Injectable()
-export class EventsDocumentService {
+export class GiftingEventsDocumentService {
 
     private _document: any;
 
     constructor(private _mongoClientService: MongoClientService){
-        this._document = this._mongoClientService.getModel( {adapter: 'mongoose'}, EventModel);
+        this._document = this._mongoClientService.getModel( {adapter: 'mongoose'}, GiftingEventModel);
     }
 
     /**
-     * Call mongoose method, call toJSON on each result and returns Event[] or undefined
+     * Call mongoose method, call toJSON on each result and returns GiftingEvent[] or undefined
      *
      * @return {Observable<Person[] | void>}
      */
-    find(): Observable<EventInterface[] | void> {
+    find(): Observable<GiftingEvent[] | void> {
         return from(this._document.find({}))
             .pipe(
                 map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined)
@@ -35,7 +34,7 @@ export class EventsDocumentService {
      *
      * @return {Observable<Event | void>}
      */
-    findById(id: string): Observable<EventInterface | void> {
+    findById(id: string): Observable<GiftingEvent | void> {
         return from(this._document.findById(id))
             .pipe(
                 map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined)
@@ -43,13 +42,13 @@ export class EventsDocumentService {
     }
 
     /**
-     * add event in events list
+     * add event in giftingEvents list
      *
      * @param {Event} event to create
      *
      * @return {Observable<Event>}
      */
-    create(event: EventInterface): Observable<EventInterface> {
+    create(event: GiftingEvent): Observable<GiftingEvent> {
         return from(this._document.create(event))
             .pipe(
                 map((doc: MongooseDocument) => doc.toJSON())

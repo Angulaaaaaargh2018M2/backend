@@ -1,13 +1,14 @@
 import {EVENTS_RESPONSE} from '../../../schemas';
 import {OnGet, Route} from '@hapiness/core';
-import {EventsService} from '../../../services/events';
+import {giftingEventsService} from '../../../services/giftingEvents';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
+import {GiftingEvent} from '../../../interfaces';
 
 
 @Route({
-    path: '/api/events',
+    path: '/api/giftingEvents',
     method: 'GET',
     config: {
         response: {
@@ -15,19 +16,19 @@ import {tap} from 'rxjs/operators';
                 200: EVENTS_RESPONSE
             }
         },
-        description: 'Get all events',
-        notes: 'Returns an array of events',
+        description: 'Get all giftingEvents',
+        notes: 'Returns an array of giftingEvents',
         tags: [ 'api', 'events' ]
     }
 })
 
-export class GetAllEvents implements  OnGet {
+export class GetAllGiftingEvents implements  OnGet {
 
-    constructor(private _eventService: EventsService, private  _logger: LoggerService){
+    constructor(private _eventService: giftingEventsService, private  _logger: LoggerService){
     }
 
 
-    onGet(request: Request): void | Observable<Event[] | void> {
+    onGet(request: Request): void | Observable<GiftingEvent[] | void> {
         return this._eventService.listAll()
             .pipe(
                 tap( _ => this._logger.info(_))

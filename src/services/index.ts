@@ -1,4 +1,4 @@
-export * from './events';
+export * from './giftingEvents';
 export * from './gifts';
 
 

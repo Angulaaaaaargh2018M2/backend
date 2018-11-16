@@ -1,18 +1,18 @@
 import {HTTPHandlerResponse, Injectable} from '@hapiness/core';
-import {Event as EventInterface} from '../../interfaces/event';
-import {EventsDocumentService} from './events-document.service';
+import {GiftingEvent as EventInterface} from '../../interfaces/giftingEvent';
+import {GiftingEventsDocumentService} from './giftingEvents-document.service';
 import {Observable, of, throwError} from 'rxjs';
 import {Biim} from '@hapiness/biim';
 import {catchError, flatMap, map} from 'rxjs/operators';
 
 @Injectable()
-export class EventsService {
+export class giftingEventsService {
 
-    constructor(private _eventsDocumentService: EventsDocumentService) {
+    constructor(private _eventsDocumentService: GiftingEventsDocumentService) {
     }
 
     /**
-     * Returns all existing events in the list
+     * Returns all existing giftingEvents in the list
      *
      * @returns {Observable<Event[] | void>}
      */
@@ -23,7 +23,7 @@ export class EventsService {
     /**
      * Returns one event of the list matching id in parameter
      *
-     * @param {string} id of the events
+     * @param {string} id of the giftingEvents
      *
      * @returns {Observable<Event>}
      */
@@ -58,7 +58,7 @@ export class EventsService {
     }
 
     /**
-     * Add event with good data in events list
+     * Add event with good data in giftingEvents list
      *
      * @param event to add
      *

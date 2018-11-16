@@ -5,11 +5,11 @@ import {Config} from '@hapiness/config';
 import {SwagModule} from '@hapiness/swag';
 import {MongoClientService, MongoModule} from '@hapiness/mongo';
 import {GiftModel} from './models/gifts';
-import {EventModel} from './models/events';
+import {GiftingEventModel} from './models/events';
 import {GiftsDocumentService, GiftsService} from './services/gifts';
-import {EventsDocumentService, EventsService} from './services/events';
+import {GiftingEventsDocumentService, giftingEventsService} from './services/giftingEvents';
 
-const eventsDocumentServiceFactory = (mongoClientService: MongoClientService) => new EventsDocumentService(mongoClientService);
+const eventsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftingEventsDocumentService(mongoClientService);
 const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftsDocumentService(mongoClientService);
 
 
@@ -22,13 +22,13 @@ const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => 
     ],
     declarations: [
         GiftModel,
-        EventModel
+        GiftingEventModel
     ],
     providers: [
         HttpServerService,
         GiftsService,
-        EventsService,
-        { provide: EventsDocumentService, useFactory: eventsDocumentServiceFactory, deps: [ MongoClientService ] },
+        giftingEventsService,
+        { provide: GiftingEventsDocumentService, useFactory: eventsDocumentServiceFactory, deps: [ MongoClientService ] },
         { provide: GiftsDocumentService, useFactory: giftsDocumentServiceFactory, deps: [ MongoClientService ] }
         ]
 })
