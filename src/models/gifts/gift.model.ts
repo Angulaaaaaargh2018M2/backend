@@ -22,7 +22,8 @@ export class GiftModel extends  Model {
             },
             quantity: {
                 type: Number,
-                required: true
+                required: true,
+                min: 1
             },
             linksGifts: {
                 type: [String],
@@ -34,9 +35,11 @@ export class GiftModel extends  Model {
                     email: {
                         type: String,
                         trim: true,
+                        required: true
                     },
                     send: {
-                        type: Boolean
+                        type: Boolean,
+                        required: true
                     }
                 }]
             },
