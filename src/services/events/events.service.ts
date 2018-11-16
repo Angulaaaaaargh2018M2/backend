@@ -1,9 +1,9 @@
 import {HTTPHandlerResponse, Injectable} from '@hapiness/core';
+import {Event as EventInterface} from '../../interfaces/event';
 import {EventsDocumentService} from './events-document.service';
 import {Observable, of, throwError} from 'rxjs';
 import {Biim} from '@hapiness/biim';
 import {catchError, flatMap, map} from 'rxjs/operators';
-
 
 @Injectable()
 export class EventsService {
@@ -16,7 +16,7 @@ export class EventsService {
      *
      * @returns {Observable<Event[] | void>}
      */
-    listAll(): Observable<Event[] | void> {
+    listAll(): Observable<EventInterface[] | void> {
         return this._eventsDocumentService.find();
     }
 
@@ -27,7 +27,7 @@ export class EventsService {
      *
      * @returns {Observable<Event>}
      */
-    one(id: string): Observable<Event> {
+    one(id: string): Observable<EventInterface> {
         return this._eventsDocumentService.findById(id)
             .pipe(
                 catchError(e => throwError(Biim.preconditionFailed(e.message))),
@@ -46,7 +46,7 @@ export class EventsService {
      *
      * @returns {Observable<HTTPHandlerResponse>}
      */
-    create(event: Event): Observable<HTTPHandlerResponse> {
+    create(event: EventInterface): Observable<HTTPHandlerResponse> {
         return this._addEvent(event)
             .pipe(
                 flatMap(_ => this._eventsDocumentService.create(_)),
@@ -66,12 +66,12 @@ export class EventsService {
      *
      * @private
      */
-    private _addEvent(event: Event): Observable<any> {
+    private _addEvent(event: EventInterface): Observable<any> {
         return of(event)
             .pipe(
                 map(_ =>
                     Object.assign(
-                        { date: this._parseDate(_.date) },
+                        { date: _.date },
                         _
                     )
                 )
@@ -87,9 +87,10 @@ export class EventsService {
      *
      * @private
      */
+    /*
     private _parseDate(date: string): number {
         const dates = date.split('/');
         return (new Date(dates[ 2 ] + '/' + dates[ 1 ] + '/' + dates[ 0 ]).getTime());
     }
-
+    */
 }

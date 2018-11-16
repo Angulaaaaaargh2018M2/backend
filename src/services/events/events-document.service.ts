@@ -4,6 +4,7 @@ import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MongooseDocument} from 'mongoose';
 import {EventModel} from '../../models/events';
+import {Event as EventInterface} from '../../interfaces/event';
 
 
 @Injectable()
@@ -20,7 +21,7 @@ export class EventsDocumentService {
      *
      * @return {Observable<Person[] | void>}
      */
-    find(): Observable<Event[] | void> {
+    find(): Observable<EventInterface[] | void> {
         return from(this._document.find({}))
             .pipe(
                 map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined)
@@ -34,7 +35,7 @@ export class EventsDocumentService {
      *
      * @return {Observable<Event | void>}
      */
-    findById(id: string): Observable<Event | void> {
+    findById(id: string): Observable<EventInterface | void> {
         return from(this._document.findById(id))
             .pipe(
                 map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined)
@@ -48,7 +49,7 @@ export class EventsDocumentService {
      *
      * @return {Observable<Event>}
      */
-    create(event: Event): Observable<Event> {
+    create(event: EventInterface): Observable<EventInterface> {
         return from(this._document.create(event))
             .pipe(
                 map((doc: MongooseDocument) => doc.toJSON())
