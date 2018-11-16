@@ -3,14 +3,14 @@ import * as Joi from 'joi';
 export const ID_PARAMETER = Joi.string().alphanum().required();
 
 
-export const GIFTING_EVENT = Joi.object().keys({
+export const GIFTING_EVENT_PAYLOAD= Joi.object().keys({
     name : Joi.string().min(2),
     nameEvent : Joi.string().min(2),
     asAGift : Joi.boolean(),
     date : Joi.date().required().min(Date())
 });
 
-export const GIFT = Joi.object().keys({
+export const GIFT_PAYLOAD = Joi.object().keys({
     name : Joi.string().min(2),
     quantity: Joi.number().min(1),
     linksGift: Joi.array(),
@@ -24,20 +24,20 @@ export const GIFT = Joi.object().keys({
 
 export const GIFTING_EVENT_RESPONSE = Joi.object().keys({
     id: ID_PARAMETER,
-    name : Joi.reach(GIFTING_EVENT, 'name'),
-    nameEvent : Joi.reach(GIFTING_EVENT, 'nameEvent'),
-    asAGift : Joi.reach(GIFTING_EVENT, 'asAGift'),
-    date : Joi.reach(GIFTING_EVENT, 'date'),
+    name : Joi.reach(GIFTING_EVENT_PAYLOAD, 'name'),
+    nameEvent : Joi.reach(GIFTING_EVENT_PAYLOAD, 'nameEvent'),
+    asAGift : Joi.reach(GIFTING_EVENT_PAYLOAD, 'asAGift'),
+    date : Joi.reach(GIFTING_EVENT_PAYLOAD, 'date'),
 });
 
 
 export const GIFT_RESPONSE = Joi.object().keys({
     id: ID_PARAMETER,
-    name : Joi.reach(GIFT, 'name'),
-    quantity: Joi.reach(GIFT, 'quantity'),
-    linksGift: Joi.reach(GIFT, 'linksGift'),
-    listPeople: Joi.reach(GIFT, 'listPeople'),
-    eventId: Joi.reach(GIFT, 'eventId')
+    name : Joi.reach(GIFT_PAYLOAD, 'name'),
+    quantity: Joi.reach(GIFT_PAYLOAD, 'quantity'),
+    linksGift: Joi.reach(GIFT_PAYLOAD, 'linksGift'),
+    listPeople: Joi.reach(GIFT_PAYLOAD, 'listPeople'),
+    eventId: Joi.reach(GIFT_PAYLOAD, 'eventId')
 });
 
 
