@@ -1,9 +1,9 @@
 import {Model, MongoClientService, MongoModel} from '@hapiness/mongo';
-import * as mongoose from "mongoose";
+import * as mongoose from 'mongoose';
 
 @MongoModel({
     adapter: 'mongoose',
-    collection: 'person'
+    collection: 'gift'
 })
 export class GiftModel extends  Model {
     readonly  schema: any;

@@ -2,7 +2,7 @@ import {Model, MongoClientService, MongoModel} from '@hapiness/mongo';
 
 @MongoModel({
     adapter: 'mongoose',
-    collection: 'person'
+    collection: 'event'
 })
 export class EventModel extends  Model {
     readonly  schema: any;
