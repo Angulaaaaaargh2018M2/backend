@@ -3,7 +3,15 @@ import { LoggerModule, LoggerService } from '@hapiness/logger';
 import { Observable } from 'rxjs';
 import {Config} from '@hapiness/config';
 import {SwagModule} from '@hapiness/swag';
-import {MongoModule} from '@hapiness/mongo';
+import {MongoClientService, MongoModule} from '@hapiness/mongo';
+import {GiftModel} from './models/gifts';
+import {EventModel} from './models/events';
+import {GiftsDocumentService, GiftsService} from './services/gifts';
+import {EventsDocumentService, EventsService} from './services/events';
+
+const eventsDocumentServiceFactory = (mongoClientService: MongoClientService) => new EventsDocumentService(mongoClientService);
+const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftsDocumentService(mongoClientService);
+
 
 @HapinessModule({
     version: '1.0.0',
@@ -12,10 +20,17 @@ import {MongoModule} from '@hapiness/mongo';
         MongoModule,
         SwagModule.setConfig(Config.get('swag'))
     ],
-    declarations: [],
+    declarations: [
+        GiftModel,
+        EventModel
+    ],
     providers: [
-        HttpServerService
-    ]
+        HttpServerService,
+        GiftsService,
+        EventsService,
+        { provide: EventsDocumentService, useFactory: eventsDocumentServiceFactory, deps: [ MongoClientService ] },
+        { provide: GiftsDocumentService, useFactory: giftsDocumentServiceFactory, deps: [ MongoClientService ] }
+        ]
 })
 export class ApplicationModule implements OnStart, OnError {
     /**
