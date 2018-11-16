@@ -1,11 +1,16 @@
 import { HapinessModule, HttpServerService, OnError, OnStart } from '@hapiness/core';
 import { LoggerModule, LoggerService } from '@hapiness/logger';
 import { Observable } from 'rxjs';
+import {Config} from '@hapiness/config';
+import {SwagModule} from '@hapiness/swag';
+import {MongoModule} from '@hapiness/mongo';
 
 @HapinessModule({
     version: '1.0.0',
     imports: [
-        LoggerModule
+        LoggerModule,
+        MongoModule,
+        SwagModule.setConfig(Config.get('swag'))
     ],
     declarations: [],
     providers: [
