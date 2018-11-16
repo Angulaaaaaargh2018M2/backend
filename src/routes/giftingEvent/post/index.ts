@@ -1,1 +1,1 @@
-export * from './one.route';
+export * from './create.route';

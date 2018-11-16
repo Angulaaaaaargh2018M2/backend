@@ -1,35 +1,42 @@
-import {OnDelete, OnGet, Request, Route} from '@hapiness/core';
+import {HTTPHandlerResponse, OnPost, Request, Route} from '@hapiness/core';
 import {giftingEventsService} from '../../../services/giftingEvents';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {GiftingEvent} from '../../../interfaces';
-import {GIFTING_EVENT_RESPONSE, ID_PARAMETER} from '../../../schemas';
+import {GIFTING_EVENT_PAYLOAD, GIFTING_EVENT_RESPONSE} from '../../../schemas';
 
 
 @Route({
-    path: '/api/giftingEvents/{id}',
-    method: 'DELETE',
+    path: '/api/giftingEvents/',
+    method: 'POST',
     config: {
         validate: {
-            params: {
-                id: ID_PARAMETER
-            }
+            payload: GIFTING_EVENT_PAYLOAD
         },
-        description: 'Delete one giftingEvents',
-        notes: 'Delete one giftingEvents for the given id in path parameter',
+        payload: {
+            output: 'data',
+            allow: 'application/json',
+            parse: true
+        },
+        response: {
+          status: {
+              201: GIFTING_EVENT_RESPONSE
+          }
+        },
+        description: 'Create one giftingEvents',
+        notes: 'Create a new giftingEvents and returns it',
         tags: [ 'api', 'giftingEvents' ]
     }
 })
 
-export class DeleteOneGiftingEvents implements  OnDelete {
+export class CreateOneGiftingEvents implements  OnPost {
 
     constructor(private _giftingEventService: giftingEventsService, private  _logger: LoggerService) {
     }
 
 
-    onDelete(request: Request): Observable<void> {
-        return this._giftingEventService.delete(request.params.id)
+    onPost(request: Request): Observable<HTTPHandlerResponse> {
+        return this._giftingEventService.create(request.payload)
             .pipe(
                 tap( _ => this._logger.info(_))
             );
