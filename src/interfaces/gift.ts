@@ -2,7 +2,7 @@ export interface Gift {
     id?: string;
     name: string;
     quantity: number;
-    linksGift: string[],
+    linksGift: string[];
     listPeople: ListedPerson[];
     eventId?: string;
 
