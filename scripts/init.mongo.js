@@ -63,7 +63,7 @@ var idAnniv = db.giftingEvents.findOne({"nameEvent": "Anniversaire"}, {_id:1});
 
 var idNoel =  db.giftingEvents.findOne({"nameEvent": "Noël"}, {_id:1});
 
-db.gifts.update({"name": "Pastèque"}, {$set: { "eventId": idNoel._id }});
-db.gifts.update({"name": "Orange"}, {$set: { "eventId": idAnniv._id }});
+db.gifts.update({"name": "Pastèque"}, {$set: { "giftingEventId": idNoel._id }});
+db.gifts.update({"name": "Orange"}, {$set: { "giftingEventId": idAnniv._id }});
 
 

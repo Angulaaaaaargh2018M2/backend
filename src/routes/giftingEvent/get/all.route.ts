@@ -4,7 +4,7 @@ import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {GiftingEvent} from '../../../interfaces';
-import {GIFTING_EVENT_RESPONSE} from '../../../schemas';
+import {GIFTING_EVENTS_RESPONSE} from '../../../schemas';
 
 
 @Route({
@@ -13,7 +13,7 @@ import {GIFTING_EVENT_RESPONSE} from '../../../schemas';
     config: {
         response: {
             status: {
-                200: GIFTING_EVENT_RESPONSE
+                200: GIFTING_EVENTS_RESPONSE
             }
         },
         description: 'Get all giftingEvents',

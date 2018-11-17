@@ -1,4 +1,4 @@
-import {OnDelete, OnPut, Request, Route} from '@hapiness/core';
+import {OnPut, Request, Route} from '@hapiness/core';
 import {giftingEventsService} from '../../../services/giftingEvents';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
@@ -39,7 +39,7 @@ export class UpdateOneGiftingEvents implements  OnPut {
     }
 
 
-    OnPut(request: Request): Observable<GiftingEvent> {
+    onPut(request: Request): Observable<GiftingEvent> {
         return this._giftingEventService.update(request.params.id, request.payload)
             .pipe(
                 tap( _ => this._logger.info(_))
