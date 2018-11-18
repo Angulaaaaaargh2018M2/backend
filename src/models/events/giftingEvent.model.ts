@@ -2,10 +2,11 @@ import {Model, MongoClientService, MongoModel} from '@hapiness/mongo';
 
 @MongoModel({
     adapter: 'mongoose',
-    collection: 'giftingEvent',
-    collectionName: 'giftingEvents'
+    collection: 'giftingevent',
+    collectionName: 'giftingevents'
 })
-export class GiftingEventModel extends  Model {
+
+export class GiftingEventModel extends Model {
     readonly  schema: any;
 
     constructor(private _mongoClientService: MongoClientService) {
@@ -20,19 +21,18 @@ export class GiftingEventModel extends  Model {
                 trim: true,
                 required: false
             },
-            asAGift: {
-                type: Boolean,
-                required: true
-            },
             nameEvent: {
                 type: String,
                 required: true,
                 trim: true
             },
+            asAGift: {
+                type: Boolean,
+                required: true
+            },
             date: {
                 type: Date,
-                required: true,
-                min: Date.now()
+                required: true
             }
 
         });
