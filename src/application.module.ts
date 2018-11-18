@@ -8,6 +8,7 @@ import {GiftModel} from './models/gifts';
 import {GiftingEventModel} from './models/events';
 import {GiftsDocumentService, GiftsService} from './services/gifts';
 import {GiftingEventsDocumentService, GiftingEventsService} from './services/giftingEvents';
+import {SendEmail} from './routes/gifts/get/testEmail';
 
 const eventsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftingEventsDocumentService(mongoClientService);
 const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftsDocumentService(mongoClientService);
@@ -22,7 +23,8 @@ const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => 
     ],
     declarations: [
         GiftModel,
-        GiftingEventModel
+        GiftingEventModel,
+        SendEmail
     ],
     providers: [
         HttpServerService,

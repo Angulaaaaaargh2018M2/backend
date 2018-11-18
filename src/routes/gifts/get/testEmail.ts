@@ -24,7 +24,7 @@ import {MailsService} from '../../../services/mails.service';
     }
 })
 
-export class GetOneGift implements  OnGet {
+export class SendEmail implements  OnGet {
 
     constructor(private _mailsService: MailsService) {
     }
