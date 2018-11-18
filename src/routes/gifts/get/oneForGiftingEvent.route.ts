@@ -1,5 +1,5 @@
 import {OnGet, Request, Route} from '@hapiness/core';
-import {GiftsService} from '../../../services/giftingEvents';
+import {GiftsService} from '../../../services/gifts';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
