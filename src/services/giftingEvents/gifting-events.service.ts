@@ -1,5 +1,5 @@
 import {HTTPHandlerResponse, Injectable} from '@hapiness/core';
-import {GiftingEvent as EventInterface} from '../../interfaces/giftingEvent';
+import {GiftingEvent, GiftingEvent as EventInterface} from '../../interfaces/giftingEvent';
 import {GiftingEventsDocumentService} from './giftingEvents-document.service';
 import {Observable, of, throwError} from 'rxjs';
 import {Biim} from '@hapiness/biim';
@@ -47,13 +47,54 @@ export class giftingEventsService {
      * @returns {Observable<HTTPHandlerResponse>}
      */
     create(event: EventInterface): Observable<HTTPHandlerResponse> {
-        return this._addEvent(event)
+        return of(event)
             .pipe(
                 flatMap(_ => this._eventsDocumentService.create(_)),
                 catchError(e =>
                         throwError(Biim.preconditionFailed(e.message))
                 ),
                 map(_ => ({ response: _, statusCode: 201 }))
+            );
+    }
+
+    /**
+     * Update an event in events list
+     *
+     * @param {string} id of the event to update
+     * @param {GiftingEvent} event data to update
+     *
+     * @returns {Observable<GiftingEvent>}
+     */
+    update(id: string, event: GiftingEvent): Observable<GiftingEvent> {
+        return this._eventsDocumentService.findByIdAndUpdate(id, event)
+            .pipe(
+                catchError(e =>
+                    throwError(Biim.preconditionFailed(e.message))
+                ),
+                flatMap(_ =>
+                    !!_ ?
+                        of(_) :
+                        throwError(Biim.notFound(`Event with id '${id}' not found`))
+                )
+            );
+    }
+
+    /**
+     * Deletes one event in events list
+     *
+     * @param {string} id of the event to delete
+     *
+     * @returns {Observable<void>}
+     */
+    delete(id: string): Observable<void> {
+        return this._eventsDocumentService.findByIdAndRemove(id)
+            .pipe(
+                catchError(e => throwError(Biim.preconditionFailed(e.message))),
+                flatMap(_ =>
+                    !!_ ?
+                        of(undefined) :
+                        throwError(Biim.notFound(`Event with id '${id}' not found`))
+                )
             );
     }
 
@@ -66,7 +107,7 @@ export class giftingEventsService {
      *
      * @private
      */
-    private _addEvent(event: EventInterface): Observable<any> {
+    /*private _addEvent(event: EventInterface): Observable<any> {
         return of(event)
             .pipe(
                 map(_ =>
@@ -76,7 +117,7 @@ export class giftingEventsService {
                     )
                 )
             );
-    }
+    }*/
 
     /**
      * Function to parse date and return timestamp

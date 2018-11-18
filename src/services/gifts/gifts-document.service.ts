@@ -4,6 +4,7 @@ import {from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {GiftModel} from '../../models/gifts';
 import {MongooseDocument} from 'mongoose';
+import {Gift} from '../../interfaces';
 
 
 @Injectable()
@@ -54,5 +55,34 @@ export class GiftsDocumentService {
             .pipe(
                 map((doc: MongooseDocument) => doc.toJSON())
             );
+    }
+
+    /**
+     * Update a gift in gifts list
+     *
+     * @param {string} id
+     * @param {Gift} gift
+     *
+     * @return {Observable<Gift | void>}
+     */
+    findByIdAndUpdate(id: string, gift: Gift): Observable<Gift | void> {
+        return from(this._document.findByIdAndUpdate(id, gift, { new: true }))
+            .pipe(
+                map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined)
+            );
+    }
+
+    /**
+     * Delete an gift in gifts list
+     *
+     * @param {string} id
+     *
+     * @return {Observable<Gift | void>}
+     */
+    findByIdAndRemove(id: string): Observable<Gift | void> {
+        return from(this._document.findByIdAndRemove(id))
+            .pipe(
+                map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined)
+            )
     }
 }

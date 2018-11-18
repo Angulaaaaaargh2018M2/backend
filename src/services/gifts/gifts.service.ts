@@ -3,6 +3,7 @@ import {GiftsDocumentService} from './gifts-document.service';
 import {Observable, of, throwError} from 'rxjs';
 import {catchError, flatMap, map} from 'rxjs/operators';
 import {Biim} from '@hapiness/biim';
+import {Gift} from '../../interfaces';
 
 
 @Injectable()
@@ -48,7 +49,7 @@ export class GiftsService {
      * @returns {Observable<HTTPHandlerResponse>}
      */
     create(gift: Gift): Observable<HTTPHandlerResponse> {
-        return this._addGift(gift)
+        return of(gift)
             .pipe(
                 flatMap(_ => this._giftsDocumentService.create(_)),
                 catchError(e =>
@@ -62,6 +63,47 @@ export class GiftsService {
             );
     }
 
+    /**
+     * Update a gift in gifts list
+     *
+     * @param {string} id of the gift to update
+     * @param {gift} gift data to update
+     *
+     * @returns {Observable<Gift>}
+     */
+    update(id: string, gift: Gift): Observable<Gift> {
+        return this._giftsDocumentService.findByIdAndUpdate(id, gift)
+            .pipe(
+                catchError(e =>
+                    throwError(Biim.preconditionFailed(e.message))
+                ),
+                flatMap(_ =>
+                    !!_ ?
+                        of(_) :
+                        throwError(Biim.notFound(`Gift with id '${id}' not found`))
+                )
+            );
+    }
+
+    /**
+     * Deletes one gift in gifts list
+     *
+     * @param {string} id of the gift to delete
+     *
+     * @returns {Observable<void>}
+     */
+    delete(id: string): Observable<void> {
+        return this._giftsDocumentService.findByIdAndRemove(id)
+            .pipe(
+                catchError(e => throwError(Biim.preconditionFailed(e.message))),
+                flatMap(_ =>
+                    !!_ ?
+                        of(undefined) :
+                        throwError(Biim.notFound(`Gift with id '${id}' not found`))
+                )
+            );
+    }
+
 
     /**
      * Add gift with good data in gifts list
@@ -72,7 +114,7 @@ export class GiftsService {
      *
      * @private
      */
-    private _addGift(gift: Gift): Observable<any> {
+    /*private _addGift(gift: Gift): Observable<any> {
         return of(gift);
-    }
+    }*/
 }

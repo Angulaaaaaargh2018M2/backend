@@ -54,4 +54,33 @@ export class GiftingEventsDocumentService {
                 map((doc: MongooseDocument) => doc.toJSON())
             );
     }
+
+    /**
+     * Update an event in events list
+     *
+     * @param {string} id
+     * @param {GiftingEvent} event
+     *
+     * @return {Observable<GiftingEvent | void>}
+     */
+    findByIdAndUpdate(id: string, event: GiftingEvent): Observable<GiftingEvent | void> {
+        return from(this._document.findByIdAndUpdate(id, event, { new: true }))
+            .pipe(
+                map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined)
+            );
+    }
+
+    /**
+     * Delete an event in events list
+     *
+     * @param {string} id
+     *
+     * @return {Observable<GiftingEvent | void>}
+     */
+    findByIdAndRemove(id: string): Observable<GiftingEvent | void> {
+        return from(this._document.findByIdAndRemove(id))
+            .pipe(
+                map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined)
+            )
+    }
 }
