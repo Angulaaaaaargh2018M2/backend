@@ -7,7 +7,15 @@ import {MongoClientService, MongoModule} from '@hapiness/mongo';
 import {GiftModel} from './models/gifts';
 import {GiftingEventModel} from './models/events';
 import {GiftsDocumentService, GiftsService} from './services/gifts';
-import {GiftingEventsDocumentService, giftingEventsService} from './services/giftingEvents';
+import {GiftingEventsDocumentService, GiftingEventsService} from './services/giftingEvents';
+import {GetAllGifts, GetOneGift} from './routes/gifts/get';
+import {GetAllGiftingEvents, GetOneGiftingEvent} from './routes/giftingEvent/get';
+import {DeleteOneGiftingEvent} from './routes/giftingEvent/delete';
+import {DeleteOneGiftForGiftingEvent} from './routes/gifts/delete/oneForGiftingEvent.route';
+import {CreateOneGiftingEvent} from './routes/giftingEvent/post';
+import {CreateOneGiftForGiftingEvent} from './routes/gifts/post/createForGiftingEvent.route';
+import {UpdateOneGiftingEvent} from './routes/giftingEvent/put';
+import {UpdateOneGiftForGiftingEvent} from './routes/gifts/put/updateForGiftingEvent.route';
 
 const eventsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftingEventsDocumentService(mongoClientService);
 const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftsDocumentService(mongoClientService);
@@ -22,12 +30,22 @@ const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => 
     ],
     declarations: [
         GiftModel,
-        GiftingEventModel
+        GiftingEventModel,
+        GetAllGifts,
+        GetOneGift,
+        GetAllGiftingEvents,
+        GetOneGiftingEvent,
+        DeleteOneGiftingEvent,
+        DeleteOneGiftForGiftingEvent,
+        CreateOneGiftingEvent,
+        CreateOneGiftForGiftingEvent,
+        UpdateOneGiftingEvent,
+        UpdateOneGiftForGiftingEvent
     ],
     providers: [
         HttpServerService,
         GiftsService,
-        giftingEventsService,
+        GiftingEventsService,
         { provide: GiftingEventsDocumentService, useFactory: eventsDocumentServiceFactory, deps: [ MongoClientService ] },
         { provide: GiftsDocumentService, useFactory: giftsDocumentServiceFactory, deps: [ MongoClientService ] }
         ]

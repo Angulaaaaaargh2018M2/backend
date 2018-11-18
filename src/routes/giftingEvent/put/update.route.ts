@@ -1,5 +1,5 @@
 import {OnPut, Request, Route} from '@hapiness/core';
-import {giftingEventsService} from '../../../services/giftingEvents';
+import {GiftingEventsService} from '../../../services/giftingEvents';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
@@ -33,9 +33,9 @@ import {GiftingEvent} from '../../../interfaces';
     }
 })
 
-export class UpdateOneGiftingEvents implements  OnPut {
+export class UpdateOneGiftingEvent implements  OnPut {
 
-    constructor(private _giftingEventService: giftingEventsService, private  _logger: LoggerService) {
+    constructor(private _giftingEventService: GiftingEventsService, private  _logger: LoggerService) {
     }
 
 

@@ -43,17 +43,19 @@ export class GiftModel extends  Model {
                     }
                 }]
             },
-            eventId: {
+            giftingEventId: {
                 type: mongoose.Schema.Types.ObjectId
             }
 
+        }, {
+            versionKey: false
         });
         this.schema.set('toJSON', {
                 virtuals: true,
                 transform: function (doc, ret) {
                     delete ret._id;
-                    if (!!ret.eventId) {
-                        ret.eventId = doc.eventId.toString();
+                    if (!!ret.giftingEventId) {
+                        ret.giftingEventId = doc.giftingEventId.toString();
                     }
                     return ret;
                 }

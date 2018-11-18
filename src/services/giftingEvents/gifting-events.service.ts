@@ -1,12 +1,12 @@
 import {HTTPHandlerResponse, Injectable} from '@hapiness/core';
-import {GiftingEvent, GiftingEvent as EventInterface} from '../../interfaces/giftingEvent';
+import {GiftingEvent} from '../../interfaces/giftingEvent';
 import {GiftingEventsDocumentService} from './giftingEvents-document.service';
 import {Observable, of, throwError} from 'rxjs';
 import {Biim} from '@hapiness/biim';
 import {catchError, flatMap, map} from 'rxjs/operators';
 
 @Injectable()
-export class giftingEventsService {
+export class GiftingEventsService {
 
     constructor(private _eventsDocumentService: GiftingEventsDocumentService) {
     }
@@ -16,7 +16,7 @@ export class giftingEventsService {
      *
      * @returns {Observable<Event[] | void>}
      */
-    listAll(): Observable<EventInterface[] | void> {
+    listAll(): Observable<GiftingEvent[] | void> {
         return this._eventsDocumentService.find();
     }
 
@@ -27,7 +27,7 @@ export class giftingEventsService {
      *
      * @returns {Observable<Event>}
      */
-    one(id: string): Observable<EventInterface> {
+    one(id: string): Observable<GiftingEvent> {
         return this._eventsDocumentService.findById(id)
             .pipe(
                 catchError(e => throwError(Biim.preconditionFailed(e.message))),
@@ -46,7 +46,7 @@ export class giftingEventsService {
      *
      * @returns {Observable<HTTPHandlerResponse>}
      */
-    create(event: EventInterface): Observable<HTTPHandlerResponse> {
+    create(event: GiftingEvent): Observable<HTTPHandlerResponse> {
         return of(event)
             .pipe(
                 flatMap(_ => this._eventsDocumentService.create(_)),

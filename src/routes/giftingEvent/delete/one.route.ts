@@ -1,5 +1,5 @@
 import {OnDelete, Request, Route} from '@hapiness/core';
-import {giftingEventsService} from '../../../services/giftingEvents';
+import {GiftingEventsService} from '../../../services/giftingEvents';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
@@ -21,9 +21,9 @@ import { ID_PARAMETER} from '../../../schemas';
     }
 })
 
-export class DeleteOneGiftingEvents implements  OnDelete {
+export class DeleteOneGiftingEvent implements  OnDelete {
 
-    constructor(private _giftingEventService: giftingEventsService, private  _logger: LoggerService) {
+    constructor(private _giftingEventService: GiftingEventsService, private  _logger: LoggerService) {
     }
 
 

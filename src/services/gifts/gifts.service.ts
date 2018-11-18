@@ -49,14 +49,14 @@ export class GiftsService {
      *
      * @returns {Observable<HTTPHandlerResponse>}
      */
-    create(eventId: string, gift: Gift): Observable<HTTPHandlerResponse> {
-        return this._addGift(eventId, gift)
+    create(giftingEventId: string, gift: Gift): Observable<HTTPHandlerResponse> {
+        return this._addGift(giftingEventId, gift)
             .pipe(
                 flatMap(_ => this._giftsDocumentService.create(_)),
                 catchError(e =>
                     e.code = 11000 ?
                         throwError(
-                            Biim.conflict(`Gift with name '${gift.name}' and for eventID '${gift.eventId}' already exists`)
+                            Biim.conflict(`Gift with name '${gift.name}' and for eventID '${gift.giftingEventId}' already exists`)
                         ) :
                         throwError(Biim.preconditionFailed(e.message))
                 ),

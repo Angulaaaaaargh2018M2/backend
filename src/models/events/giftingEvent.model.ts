@@ -2,7 +2,8 @@ import {Model, MongoClientService, MongoModel} from '@hapiness/mongo';
 
 @MongoModel({
     adapter: 'mongoose',
-    collection: 'giftingEvents'
+    collection: 'giftingEvent',
+    collectionName: 'giftingEvents'
 })
 export class GiftingEventModel extends  Model {
     readonly  schema: any;
@@ -35,5 +36,13 @@ export class GiftingEventModel extends  Model {
             }
 
         });
+        this.schema.set('toJSON', {
+                virtuals: true,
+                transform: function (doc, ret) {
+                    delete ret._id;
+                    return ret;
+                }
+            }
+        );
     }
 }
