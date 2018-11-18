@@ -6,11 +6,18 @@ import { LoggerExt } from '@hapiness/logger';
 import { ApplicationModule } from './application.module';
 import {MongoClientExt} from '@hapiness/mongo';
 import {Config} from '@hapiness/config';
+import {SendEmail} from './routes/gifts/get/testEmail';
 
 // bootstrap application
 Hapiness.bootstrap(ApplicationModule, [
     LoggerExt,
-    HttpServerExt.setConfig({ host: '0.0.0.0', port: 4443 }),
+    HttpServerExt.setConfig({ host: '0.0.0.0', port: 4443, options: {
+        connections: {
+            routes: {
+                cors: true
+            }
+        }
+    }}),
     MongoClientExt.setConfig({
         load: [
             {
