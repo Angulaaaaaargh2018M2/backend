@@ -8,14 +8,15 @@ import {GiftModel} from './models/gifts';
 import {GiftingEventModel} from './models/events';
 import {GiftsDocumentService, GiftsService} from './services/gifts';
 import {GiftingEventsDocumentService, GiftingEventsService} from './services/giftingEvents';
+import {UpdateOneGiftForGiftingEvent} from './routes/gifts/put/updateForGiftingEvent.route';
+import {DeleteOneGiftForGiftingEvent} from './routes/gifts/delete/oneForGiftingEvent.route';
 import {GetAllGifts, GetOneGift} from './routes/gifts/get';
 import {GetAllGiftingEvents, GetOneGiftingEvent} from './routes/giftingEvent/get';
 import {DeleteOneGiftingEvent} from './routes/giftingEvent/delete';
-import {DeleteOneGiftForGiftingEvent} from './routes/gifts/delete/oneForGiftingEvent.route';
-import {CreateOneGiftingEvent} from './routes/giftingEvent/post';
 import {CreateOneGiftForGiftingEvent} from './routes/gifts/post/createForGiftingEvent.route';
 import {UpdateOneGiftingEvent} from './routes/giftingEvent/put';
-import {UpdateOneGiftForGiftingEvent} from './routes/gifts/put/updateForGiftingEvent.route';
+import {CreateOneGiftingEvent} from './routes/giftingEvent/post';
+import {SendEmail} from './routes/gifts/get/testEmail';
 
 const eventsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftingEventsDocumentService(mongoClientService);
 const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftsDocumentService(mongoClientService);
@@ -41,6 +42,7 @@ const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => 
         CreateOneGiftForGiftingEvent,
         UpdateOneGiftingEvent,
         UpdateOneGiftForGiftingEvent
+        SendEmail
     ],
     providers: [
         HttpServerService,

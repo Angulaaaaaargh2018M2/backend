@@ -1,9 +1,13 @@
 import {HTTPHandlerResponse, OnPost, Request, Route} from '@hapiness/core';
+<<<<<<< HEAD
 import {GiftingEventsService} from '../../../services/giftingEvents';
+=======
+>>>>>>> 4a721dc2dfd02aa1344093180365873f03d3892f
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {GIFTING_EVENT_PAYLOAD, GIFTING_EVENT_RESPONSE} from '../../../schemas';
+import {GiftingEventsService} from '../../../services/giftingEvents';
 
 
 @Route({

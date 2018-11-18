@@ -43,15 +43,15 @@
     ],
     "contributors": [
         {
-            "name": "Nicolas Jessel",
-            "url": "https://github.com/njl07"
+            "name": "",
+            "url": ""
         }
     ],
-    "license": "SEE LICENSE IN https://github.com/njl07/nwt-school-back/blob/master/LICENSE.md",
+    "license": "",
     "bugs": {
-        "url": "https://github.com/njl07/nwt-school-back/issues"
+        "url": ""
     },
-    "homepage": "https://github.com/njl07/nwt-school-back#readme",
+    "homepage": "",
     "dependencies": {
         "@hapiness/biim": "^1.4.0",
         "@hapiness/config": "^1.2.1",
@@ -61,6 +61,7 @@
         "@hapiness/swag": "^1.2.0",
         "@types/joi": "^14.0.0",
         "@types/node": "^10.12.2",
+        "node-mailjet": "^3.3.1",
         "rxjs": "^6.3.3",
         "rxjs-compat": "~6.2.2"
     },
