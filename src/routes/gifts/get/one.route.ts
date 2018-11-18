@@ -1,10 +1,10 @@
 import {OnGet, Request, Route} from '@hapiness/core';
-import {GiftsService} from '../../../services/giftingEvents';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Gift} from '../../../interfaces';
 import {GIFT_RESPONSE, ID_PARAMETER} from '../../../schemas';
+import {GiftsService} from '../../../services/gifts';
 
 
 @Route({
@@ -34,7 +34,7 @@ export class GetOneGift implements  OnGet {
 
 
     onGet(request: Request): Observable<Gift> {
-        return this._giftsService.listAllForGiftingEvent(request.params.id)
+        return this._giftsService.one(request.params.id)
             .pipe(
                 tap( _ => this._logger.info(_))
             );

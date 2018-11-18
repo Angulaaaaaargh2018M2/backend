@@ -1,9 +1,9 @@
 import {HTTPHandlerResponse, OnPost, Request, Route} from '@hapiness/core';
-import {GiftsService} from '../../../services/giftingEvents';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {GIFT_PAYLOAD, GIFT_RESPONSE, ID_PARAMETER} from '../../../schemas';
+import {GiftsService} from '../../../services/gifts';
 
 
 @Route({
@@ -39,7 +39,7 @@ export class CreateOneGiftForGiftingEvent implements OnPost {
 
 
     onPost(request: Request): Observable<HTTPHandlerResponse> {
-        return this._giftsService.createForGiftingEvent(request.params.giftingEventId, request.payload)
+        return this._giftsService.create(request.params.giftingEventId, request.payload)
             .pipe(
                 tap( _ => this._logger.info(_))
             );

@@ -85,4 +85,17 @@ export class GiftsDocumentService {
                 map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined)
             )
     }
+
+    /**
+     * return tab of gifts for a event with id giftingEventId
+     * @param giftingEventId
+     *
+     * @return {Observable<Gift | void>}
+     */
+    allForGiftingEvent(giftingEventId: string): Observable<Gift[] | void> {
+        return from(this._document.find({'giftingEventId': giftingEventId}))
+            .pipe(
+                map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined)
+            );
+    }
 }
