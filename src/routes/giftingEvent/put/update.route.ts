@@ -1,10 +1,10 @@
 import {OnPut, Request, Route} from '@hapiness/core';
-import {giftingEventsService} from '../../../services/giftingEvents';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {GIFTING_EVENT_PAYLOAD, GIFTING_EVENT_RESPONSE, ID_PARAMETER} from '../../../schemas';
 import {GiftingEvent} from '../../../interfaces';
+import {GiftingEventsService} from '../../../services/giftingEvents';
 
 
 @Route({
@@ -35,7 +35,7 @@ import {GiftingEvent} from '../../../interfaces';
 
 export class UpdateOneGiftingEvents implements  OnPut {
 
-    constructor(private _giftingEventService: giftingEventsService, private  _logger: LoggerService) {
+    constructor(private _giftingEventService: GiftingEventsService, private  _logger: LoggerService) {
     }
 
 

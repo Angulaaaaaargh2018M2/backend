@@ -6,7 +6,7 @@ import {Biim} from '@hapiness/biim';
 import {catchError, flatMap, map} from 'rxjs/operators';
 
 @Injectable()
-export class giftingEventsService {
+export class GiftingEventsService {
 
     constructor(private _eventsDocumentService: GiftingEventsDocumentService) {
     }

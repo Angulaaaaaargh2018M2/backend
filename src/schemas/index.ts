@@ -3,7 +3,7 @@ import * as Joi from 'joi';
 export const ID_PARAMETER = Joi.string().alphanum().required();
 
 
-export const GIFTING_EVENT_PAYLOAD= Joi.object().keys({
+export const GIFTING_EVENT_PAYLOAD = Joi.object().keys({
     name : Joi.string().min(2),
     nameEvent : Joi.string().min(2),
     asAGift : Joi.boolean(),

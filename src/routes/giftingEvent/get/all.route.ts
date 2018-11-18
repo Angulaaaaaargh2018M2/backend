@@ -1,10 +1,10 @@
 import {OnGet, Request, Route} from '@hapiness/core';
-import {giftingEventsService} from '../../../services/giftingEvents';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {GiftingEvent} from '../../../interfaces';
 import {GIFTING_EVENTS_RESPONSE} from '../../../schemas';
+import {GiftingEventsService} from '../../../services/giftingEvents';
 
 
 @Route({
@@ -24,7 +24,7 @@ import {GIFTING_EVENTS_RESPONSE} from '../../../schemas';
 
 export class GetAllGiftingEvents implements  OnGet {
 
-    constructor(private _eventService: giftingEventsService, private  _logger: LoggerService) {
+    constructor(private _eventService: GiftingEventsService, private  _logger: LoggerService) {
     }
 
 

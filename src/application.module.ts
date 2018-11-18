@@ -7,7 +7,7 @@ import {MongoClientService, MongoModule} from '@hapiness/mongo';
 import {GiftModel} from './models/gifts';
 import {GiftingEventModel} from './models/events';
 import {GiftsDocumentService, GiftsService} from './services/gifts';
-import {GiftingEventsDocumentService, giftingEventsService} from './services/giftingEvents';
+import {GiftingEventsDocumentService, GiftingEventsService} from './services/giftingEvents';
 
 const eventsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftingEventsDocumentService(mongoClientService);
 const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftsDocumentService(mongoClientService);
@@ -27,7 +27,7 @@ const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => 
     providers: [
         HttpServerService,
         GiftsService,
-        giftingEventsService,
+        GiftingEventsService,
         { provide: GiftingEventsDocumentService, useFactory: eventsDocumentServiceFactory, deps: [ MongoClientService ] },
         { provide: GiftsDocumentService, useFactory: giftsDocumentServiceFactory, deps: [ MongoClientService ] }
         ]
