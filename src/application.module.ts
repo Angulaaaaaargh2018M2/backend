@@ -41,7 +41,7 @@ const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => 
         CreateOneGiftingEvent,
         CreateOneGiftForGiftingEvent,
         UpdateOneGiftingEvent,
-        UpdateOneGiftForGiftingEvent
+        UpdateOneGiftForGiftingEvent,
         SendEmail
     ],
     providers: [
