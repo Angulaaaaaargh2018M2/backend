@@ -35,7 +35,7 @@ export class GetOneGiftForGiftingEvent implements  OnGet {
 
 
     onGet(request: Request): Observable<Gift> {
-        return this._giftsService.listAllForGiftingEvent(request.params.idgiftingEventId, request.params.id)
+        return this._giftsService.oneForGiftingEvent(request.params.idgiftingEventId, request.params.id)
             .pipe(
                 tap( _ => this._logger.info(_))
             );
