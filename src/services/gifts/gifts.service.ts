@@ -116,9 +116,9 @@ export class GiftsService {
         return this._giftsDocumentService.allForGiftingEvent(giftingEventId)
             .pipe(
                 catchError(e => throwError(Biim.preconditionFailed(e.message))),
-                flatMap(_ =>
-                    !!_ ?
-                        of(undefined) :
+                flatMap(gifts =>
+                    !!gifts ?
+                        of(gifts) :
                         throwError(Biim.notFound(`list of Gifts for event with id '${giftingEventId}' not found`))
                 )
             );
