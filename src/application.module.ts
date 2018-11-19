@@ -10,13 +10,13 @@ import {GiftsDocumentService, GiftsService} from './services/gifts';
 import {GiftingEventsDocumentService, GiftingEventsService} from './services/giftingEvents';
 import {UpdateOneGiftForGiftingEvent} from './routes/gifts/put/updateForGiftingEvent.route';
 import {DeleteOneGiftForGiftingEvent} from './routes/gifts/delete/oneForGiftingEvent.route';
-import {GetAllGifts, GetOneGift} from './routes/gifts/get';
+import {GetAllGifts, GetAllGiftsForGiftingEvent, GetOneGift} from './routes/gifts/get';
 import {GetAllGiftingEvents, GetOneGiftingEvent} from './routes/giftingEvent/get';
 import {DeleteOneGiftingEvent} from './routes/giftingEvent/delete';
 import {CreateOneGiftForGiftingEvent} from './routes/gifts/post/createForGiftingEvent.route';
 import {UpdateOneGiftingEvent} from './routes/giftingEvent/put';
 import {CreateOneGiftingEvent} from './routes/giftingEvent/post';
-import {SendEmail} from './routes/gifts/get/testEmail';
+import {SendEmail} from './routes/gifts/get/email.route';
 import {MailsService} from './services/mails.service';
 
 const eventsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftingEventsDocumentService(mongoClientService);
@@ -42,7 +42,8 @@ const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => 
         CreateOneGiftForGiftingEvent,
         UpdateOneGiftingEvent,
         UpdateOneGiftForGiftingEvent,
-        SendEmail
+        SendEmail,
+        GetAllGiftsForGiftingEvent
     ],
     providers: [
         HttpServerService,
