@@ -30,7 +30,6 @@ export class MailsService {
     }
 
     sendEmail(gift: Gift, emailList: string) {
-        // console.log(emailList);
         this._giftingEventsService.one(gift.giftingEventId).subscribe((giftEvent: GiftingEvent) => {
             let mailOptions = {
                 from: '"Easy Gift" <' + Config.get('mail.auth.user') + '>', // sender address
