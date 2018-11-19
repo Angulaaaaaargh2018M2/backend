@@ -18,6 +18,7 @@ import {UpdateOneGiftingEvent} from './routes/giftingEvent/put';
 import {CreateOneGiftingEvent} from './routes/giftingEvent/post';
 import {SendEmail} from './routes/gifts/get/email.route';
 import {MailsService} from './services/mails.service';
+import {SendOneEmail} from './routes/gifts/get/one.email.route';
 
 const eventsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftingEventsDocumentService(mongoClientService);
 const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftsDocumentService(mongoClientService);
@@ -43,6 +44,7 @@ const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => 
         UpdateOneGiftingEvent,
         UpdateOneGiftForGiftingEvent,
         SendEmail,
+        SendOneEmail,
         GetAllGiftsForGiftingEvent
     ],
     providers: [
