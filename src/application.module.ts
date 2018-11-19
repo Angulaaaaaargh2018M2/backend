@@ -17,10 +17,10 @@ import {CreateOneGiftForGiftingEvent} from './routes/gifts/post/createForGifting
 import {UpdateOneGiftingEvent} from './routes/giftingEvent/put';
 import {CreateOneGiftingEvent} from './routes/giftingEvent/post';
 import {SendEmail} from './routes/gifts/get/testEmail';
+import {MailsService} from './services/mails.service';
 
 const eventsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftingEventsDocumentService(mongoClientService);
 const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => new GiftsDocumentService(mongoClientService);
-
 
 @HapinessModule({
     version: '1.0.0',
@@ -48,6 +48,7 @@ const giftsDocumentServiceFactory = (mongoClientService: MongoClientService) => 
         HttpServerService,
         GiftsService,
         GiftingEventsService,
+        MailsService,
         { provide: GiftingEventsDocumentService, useFactory: eventsDocumentServiceFactory, deps: [ MongoClientService ] },
         { provide: GiftsDocumentService, useFactory: giftsDocumentServiceFactory, deps: [ MongoClientService ] }
         ]
@@ -80,6 +81,7 @@ export class ApplicationModule implements OnStart, OnError {
      * @return {void | Observable<any>}
      */
     onError(error: Error, data?: any): void | Observable<any> {
-        this._logger.error('A problem occurred during application\'s lifecycle');
+        this._logger.error('A problem occurred during application\'s lifecycle. Error name : ' + error.name +
+            ' Error message : ' + error.message);
     }
 }

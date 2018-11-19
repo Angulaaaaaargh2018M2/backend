@@ -6,10 +6,14 @@ swag:
   info:
     title: Easy gifts for free
 mongodb:
-  host: 0.0.0.0
+  host: 172.17.0.2
   port: 27017
   db: angulaaaaaargh
-mailjet:
-  key:
-    public: f9dea911c99fa19c24b0d3d5a45da674
-    private: 6f054dfc49b5926107e4bd37d5b72c60
+mail:
+  host: smtp.gmail.com
+  port: 465
+  secure: true
+  auth: {
+    user: ezgifts54@gmail.com,
+    pass: MotDePasse!54
+  }

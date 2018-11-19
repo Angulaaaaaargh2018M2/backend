@@ -1,6 +1,6 @@
 import {OnGet, Request, Route} from '@hapiness/core';
 import {Observable, of} from 'rxjs';
-import {GIFT_RESPONSE, ID_PARAMETER} from '../../../schemas';
+import {GIFT_RESPONSE} from '../../../schemas';
 import {MailsService} from '../../../services/mails.service';
 
 
@@ -8,11 +8,6 @@ import {MailsService} from '../../../services/mails.service';
     path: '/api/gifts/email',
     method: 'GET',
     config: {
-        validate: {
-            params: {
-                id: ID_PARAMETER
-            }
-        },
         response: {
             status: {
                 200: GIFT_RESPONSE
@@ -31,6 +26,7 @@ export class SendEmail implements  OnGet {
 
 
     onGet(request: Request): Observable<void> {
+        console.log('test');
         this._mailsService.testEmail();
         return of(undefined);
     }

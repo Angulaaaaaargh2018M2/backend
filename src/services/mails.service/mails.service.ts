@@ -3,33 +3,34 @@ import {Config} from '@hapiness/config';
 
 @Injectable()
 export class MailsService {
-    // To store mailjet credentials
-    private _mailjet: any;
+    // To store transporter nodemailer
+    private transporter: any;
 
     constructor() {
-        this._mailjet = require ('node-mailjet')
-            .connect(Config.get('mailjet.key.public'), Config.get('mailjet.key.private'), {
-                url: 'api.mailjet.com', // default is the API url
-                version: 'v3.1', // default is '/v3'
-                perform_api_call: true // used for tests. default is true
-            });
+        let nodemailer = require('nodemailer');
+        this.transporter = nodemailer.createTransport(Config.get('mail'));
     }
 
     testEmail() {
-        let sendEmail = this._mailjet.post('send');
-
-        let emailData = {
-            'FromEmail': 'simonhajek88@gmail.com',
-            'FromName': 'Mailjet Pilot',
-            'Subject': 'Hello world Mailjet!',
-            'Text-part': 'This is another Email',
-            'Recipients': [{'Email': 'simonhajek88@gmail.com'}],
+        // setup email data with unicode symbols
+        let mailOptions = {
+            from: '"Easy Gift" <' + Config.get('mail.auth.user') + '>', // sender address
+            to: 'simonhajek88@gmail.com', // list of receivers
+            subject: 'Hello ✔', // Subject line
+            text: 'Hello world?', // plain text body
+            html: '<b>Hello world?</b>' // html body
         };
 
-        sendEmail
-            .request(emailData)
-            .then()
-            .catch();
+        // send mail with defined transport object
+        this.transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('Message sent: %s', info.messageId);
+
+            // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+            // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+        });
     }
 
 

@@ -62,6 +62,7 @@
         "@types/joi": "^14.0.0",
         "@types/node": "^10.12.2",
         "node-mailjet": "^3.3.1",
+        "nodemailer": "^4.6.8",
         "rxjs": "^6.3.3",
         "rxjs-compat": "~6.2.2"
     },
