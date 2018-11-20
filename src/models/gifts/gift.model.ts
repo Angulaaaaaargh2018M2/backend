@@ -7,12 +7,28 @@ import * as mongoose from 'mongoose';
 })
 export class GiftModel extends  Model {
     readonly  schema: any;
+    readonly schemaListPerson: any
 
     constructor(private _mongoClientService: MongoClientService) {
 
         super(GiftModel);
 
         const dao = this._mongoClientService.getDao(this.connectionOptions);
+
+        this.schemaListPerson = new dao.Schema({
+            mail: {
+                type: String,
+                    trim: true,
+                required: true
+            },
+            send: {
+                type: Boolean,
+                    required: true
+            }
+        }, {
+            _id : false
+            }
+        );
 
         this.schema = new dao.Schema( {
             name: {
@@ -31,17 +47,7 @@ export class GiftModel extends  Model {
                 trim: true
             },
             listPeople: {
-                type: [{
-                    mail: {
-                        type: String,
-                        trim: true,
-                        required: true
-                    },
-                    send: {
-                        type: Boolean,
-                        required: true
-                    }
-                }]
+                type: [this.schemaListPerson]
             },
             giftingEventId: {
                 type: mongoose.Schema.Types.ObjectId
