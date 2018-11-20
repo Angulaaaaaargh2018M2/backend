@@ -28,7 +28,7 @@ export const GIFTING_EVENT_RESPONSE = Joi.object().keys({
     name : Joi.reach(GIFTING_EVENT_PAYLOAD, 'name'),
     nameEvent : Joi.reach(GIFTING_EVENT_PAYLOAD, 'nameEvent'),
     asAGift : Joi.reach(GIFTING_EVENT_PAYLOAD, 'asAGift'),
-    date : Joi.reach(GIFTING_EVENT_PAYLOAD, 'date'),
+    date : Joi.date().required()
 });
 
 
