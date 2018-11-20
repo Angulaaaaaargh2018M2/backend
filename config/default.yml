@@ -5,14 +5,11 @@ server:
     connections:
       routes:
         cors: true
-
-
 swag:
   info:
     title: Easy gifts for free
-
 mongodb:
-  host: 0.0.0.0
+  host: 172.17.0.2
   port: 27017
   db: angulaaaaaargh
 mail:
