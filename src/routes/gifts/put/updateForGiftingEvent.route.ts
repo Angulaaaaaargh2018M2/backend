@@ -3,7 +3,7 @@ import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Gift} from '../../../interfaces';
-import {GIFT_PAYLOAD, GIFT_RESPONSE} from '../../../schemas';
+import {GIFT_PAYLOAD, GIFT_RESPONSE, ID_PARAMETER} from '../../../schemas';
 import {GiftsService} from '../../../services/gifts';
 
 
@@ -12,6 +12,9 @@ import {GiftsService} from '../../../services/gifts';
     method: 'PUT',
     config: {
         validate: {
+            params: {
+                id: ID_PARAMETER
+            },
             payload: GIFT_PAYLOAD
         },
         payload: {

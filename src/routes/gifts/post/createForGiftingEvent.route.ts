@@ -7,7 +7,7 @@ import {GiftsService} from '../../../services/gifts';
 
 
 @Route({
-    path: '/api/gifts/',
+    path: '/api/gifts',
     method: 'POST',
     config: {
         validate: {
