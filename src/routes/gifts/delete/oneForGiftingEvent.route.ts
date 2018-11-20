@@ -7,13 +7,12 @@ import {GiftsService} from '../../../services/gifts';
 
 
 @Route({
-    path: '/api/giftingEvents/{giftingEventId}/gifts/{id}',
+    path: '/api/gifts/{id}',
     method: 'DELETE',
     config: {
         validate: {
             params: {
-                id: ID_PARAMETER,
-                giftingEventId: ID_PARAMETER
+                id: ID_PARAMETER
             }
         },
         description: 'Delete one gift',
