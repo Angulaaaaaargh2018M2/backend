@@ -49,8 +49,8 @@ export class GiftsService {
      *
      * @returns {Observable<HTTPHandlerResponse>}
      */
-    create(giftingEventId: string, gift: Gift): Observable<HTTPHandlerResponse> {
-        return this._addGift(giftingEventId, gift)
+    create(gift: Gift): Observable<HTTPHandlerResponse> {
+        return this._addGift(gift.giftingEventId, gift)
             .pipe(
                 flatMap(_ => this._giftsDocumentService.create(_)),
                 catchError(e =>

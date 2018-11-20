@@ -36,7 +36,7 @@ export class CreateOneGiftForGiftingEvent implements OnPost {
 
 
     onPost(request: Request): Observable<HTTPHandlerResponse> {
-        return this._giftsService.create(request.params.giftingEventId, request.payload)
+        return this._giftsService.create(request.payload)
             .pipe(
                 tap( _ => this._logger.info(_))
             );
