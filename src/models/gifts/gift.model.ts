@@ -32,7 +32,7 @@ export class GiftModel extends  Model {
             },
             listPeople: {
                 type: [{
-                    email: {
+                    mail: {
                         type: String,
                         trim: true,
                         required: true

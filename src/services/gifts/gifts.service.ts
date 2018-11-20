@@ -56,7 +56,8 @@ export class GiftsService {
                 catchError(e =>
                     e.code = 11000 ?
                         throwError(
-                            Biim.conflict(`Gift with name '${gift.name}' and for eventID '${gift.giftingEventId}' already exists`)
+                            Biim.conflict(`Gift with name '${gift.name}' and for eventID '${gift.giftingEventId}' already exists` +
+                                e.toString())
                         ) :
                         throwError(Biim.preconditionFailed(e.message))
                 ),
