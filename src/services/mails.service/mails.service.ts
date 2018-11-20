@@ -51,7 +51,9 @@ export class MailsService {
                 }
                 console.log('Message sent: %s', info.toString());
             });
-            this._giftsDocumentService.findByIdAndUpdate(gift.id, gift);
+            this._giftsDocumentService.findByIdAndUpdate(gift.id, gift).subscribe( (gift2: Gift) => {
+
+            });
         });
 
     }

@@ -8,7 +8,7 @@ import {Gift} from '../../../interfaces';
 
 
 @Route({
-    path: '/api/gifts/{id}/email',
+    path: '/api/gifts/{id}/emails',
     method: 'GET',
     config: {
         validate: {
@@ -16,7 +16,7 @@ import {Gift} from '../../../interfaces';
                 id: ID_PARAMETER
             }
         },
-        description: 'Send email for one gift to all link email from the gift',
+        description: 'Send emails for one gift to all link email from the gift',
         notes: 'Returns 200 if ok',
         tags: [ 'api', 'gifts' ]
     }

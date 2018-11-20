@@ -4,11 +4,11 @@ import {EMAIL, ID_PARAMETER} from '../../../schemas';
 import {MailsService} from '../../../services/mails.service';
 import {tap} from 'rxjs/operators';
 import {LoggerService} from '@hapiness/logger';
-import {Gift} from '../../../interfaces';
+import {Gift, ListedPerson} from '../../../interfaces';
 
 
 @Route({
-    path: '/api/gifts/{id}/email/{email}',
+    path: '/api/gifts/{id}/emails/{email}',
     method: 'GET',
     config: {
         validate: {
@@ -35,7 +35,17 @@ export class SendOneEmail implements  OnGet {
                 tap( _ => this._logger.info(_))
             ).subscribe( (gift: Gift) => {
             let emailList = request.params.email;
-            this._mailsService.sendEmail(gift, emailList);
+            let listedPerson: ListedPerson = new class implements ListedPerson {
+                mail: string;
+                send: boolean;
+            };
+            listedPerson.mail = emailList;
+            listedPerson.send = false;
+            console.log('==========================');
+            console.log(listedPerson);
+            console.log(gift.listPeople.indexOf(listedPerson));
+            console.log('===========================')
+            // this._mailsService.sendEmail(gift, emailList);
         });
         return of(undefined);
     }

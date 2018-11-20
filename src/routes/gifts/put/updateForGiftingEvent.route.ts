@@ -8,7 +8,7 @@ import {GiftsService} from '../../../services/gifts';
 
 
 @Route({
-    path: '/api/giftingEvents/{giftingEventId}/gifts/{id}',
+    path: '/api/gifts/{id}',
     method: 'PUT',
     config: {
         validate: {

@@ -46,7 +46,7 @@ db.gifts.insertMany([
         ],
         "listPeople": [
             {
-                "mail": "horatiu.cirstea@plop.com",
+                "mail": "simonhajek88@gmail.com",
                 "send": false
             },
             {
