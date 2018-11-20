@@ -9,7 +9,7 @@ export const GIFTING_EVENT_PAYLOAD = Joi.object().keys({
     nameEvent : Joi.string().min(2),
     asAGift : Joi.boolean(),
     date : Joi.date().required().min(Date())
-});
+}).options({stripUnknown: true});
 
 export const GIFT_PAYLOAD = Joi.object().keys({
     name : Joi.string().min(2),
@@ -20,7 +20,7 @@ export const GIFT_PAYLOAD = Joi.object().keys({
         send: Joi.boolean()
     }),
     giftingEventId: Joi.string()
-});
+}).options({stripUnknown: true});
 
 
 export const GIFTING_EVENT_RESPONSE = Joi.object().keys({

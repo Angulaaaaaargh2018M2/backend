@@ -28,7 +28,7 @@ export class GetAllGifts implements  OnGet {
     }
 
 
-    onGet(request: Request): void | Observable<Gift[] | void> {
+    onGet(request: Request): Observable<Gift[] | void> {
         return this._giftsService.listAll()
             .pipe(
                 tap( _ => this._logger.info(_))

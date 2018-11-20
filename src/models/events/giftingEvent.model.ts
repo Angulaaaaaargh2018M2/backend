@@ -35,6 +35,9 @@ export class GiftingEventModel extends Model {
                 required: true
             }
 
+        },
+{
+            versionKey: false
         });
         this.schema.set('toJSON', {
                 virtuals: true,
