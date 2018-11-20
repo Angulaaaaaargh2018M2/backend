@@ -2,7 +2,7 @@ import {HTTPHandlerResponse, OnPost, Request, Route} from '@hapiness/core';
 import {LoggerService} from '@hapiness/logger';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {GIFT_PAYLOAD, GIFT_RESPONSE, ID_PARAMETER} from '../../../schemas';
+import {GIFT_PAYLOAD, GIFT_RESPONSE} from '../../../schemas';
 import {GiftsService} from '../../../services/gifts';
 
 
@@ -11,9 +11,6 @@ import {GiftsService} from '../../../services/gifts';
     method: 'POST',
     config: {
         validate: {
-            params: {
-                giftingEventId: ID_PARAMETER
-            },
             payload: GIFT_PAYLOAD
         },
         payload: {
