@@ -35,7 +35,8 @@ export class MailsService {
                 from: '"Easy Gift" <' + Config.get('mail.auth.user') + '>', // sender address
                 to: emailList, // list of receivers
                 subject: giftEvent.nameEvent + ' C\'est pour bientôt !!' , // Subject line
-                html: '<div><p>Bonjour, comme ' + (emailList.split(', ').length > 1 ? 'vous le savez, ' : 'tu le sais')  +
+                html: '<div><p>Bonjour, comme ' + (emailList.split(', ').length > 1 ? 'vous le savez, l\'événement : ' :
+                    'tu le sais l\'événement :  ')  +
                     giftEvent.nameEvent + ' approche à grands pas ! C\'est le ' +
                     new Date(giftEvent.date).getDay() + '/' + new Date(giftEvent.date).getMonth() + '/' +
                     new Date(giftEvent.date).getFullYear() + ' <br>C\'est pourquoi je ' + (emailList.split(', ').length > 1 ?
