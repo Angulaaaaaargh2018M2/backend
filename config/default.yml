@@ -5,8 +5,6 @@ server:
     connections:
       routes:
         cors: true
-
-
 swag:
   info:
     title: Easy gifts for free
