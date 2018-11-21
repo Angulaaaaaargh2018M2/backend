@@ -66,4 +66,8 @@ var idNoel =  db.giftingevents.findOne({"nameEvent": "Noël"}, {_id:1});
 db.gifts.update({"name": "Pastèque"}, {$set: { "giftingEventId": idNoel._id }});
 db.gifts.update({"name": "Orange"}, {$set: { "giftingEventId": idAnniv._id }});
 
-
+/**
+ * This script is to create index inside the collection people of the database nwt
+ * You can use it with mongo-shell or a tool like Robo3T
+ */
+db.getCollection('gifts').createIndex({ name: 1, giftingEventId: 1 }, { unique: true });
