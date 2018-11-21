@@ -41,7 +41,7 @@ export class SendOneEmail implements  OnGet {
             };
             listedPerson.mail = emailList;
             listedPerson.send = false;
-            // this._mailsService.sendEmail(gift, emailList);
+            this._mailsService.sendEmail(gift, emailList);
         });
         return of(undefined);
     }
